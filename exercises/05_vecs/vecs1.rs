@@ -1,10 +1,15 @@
 fn elems_to_vec(a: i32, b: i32, c: i32) -> Vec<i32> {
     // TODO: Return a vector containing the elements a, b and c (in this order).
     // Use the "vec!" macro.
+    let v1 = vec![a,b,c];
+    v1
 }
 
 fn main() {
     // You can optionally experiment here.
+    for i in elems_to_vec(1,2,3){
+        println!("{} as", i);
+    }
 }
 
 #[cfg(test)]
