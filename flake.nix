@@ -12,7 +12,7 @@
         pkgs = import nixpkgs { inherit system; };
       in
       {
-        packages."x86_64-linux".default = pkgs.rustPlatform.buildRustPackage {
+        packages.default = pkgs.rustPlatform.buildRustPackage {
           name = "my-rust-project";
           src = ./.;
           buildInputs = with pkgs; [
@@ -21,7 +21,7 @@
           nativeBuildInputs = with pkgs; [
             pkg-config
           ];
-          cargoHash = "sha256-PLACEHOLDER"; # Replace with the actual hash after first build
+          cargoHash = "sha256-pZGm1Av0IEBKARczz7exkNYsZb8LzaMrV7J32a2fFG4="; #32 byte hash, Replace with the actual hash after first build
         };
 
         devShells.default = pkgs.mkShell {
