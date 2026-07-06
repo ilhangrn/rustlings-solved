@@ -21,7 +21,11 @@
           nativeBuildInputs = with pkgs; [
             pkg-config
           ];
-          cargoHash = "sha256-pZGm1Av0IEBKARczz7exkNYsZb8LzaMrV7J32a2fFG4="; #32 byte hash, Replace with the actual hash after first build
+          # cargoHash = "sha256-GMuoovINEaIAETRbLhtImLFXdFjLE5b77xtXaVx+jIc="; #32 byte hash, Replace with the actual hash after first build
+          # we can use cargo lock file for hash
+          cargoLock = {
+            lockFile = ./Cargo.lock;
+          };
         };
 
         devShells.default = pkgs.mkShell {
