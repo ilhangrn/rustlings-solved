@@ -9,20 +9,22 @@
 struct Fireworks {
     rockets: usize,
 }
-
+impl Fireworks{
 // TODO: Turn this function into an associated function on `Fireworks`.
-fn new_fireworks() -> Fireworks {
-    Fireworks { rockets: 0 }
+fn new() -> Self {
+    Self { rockets: 0 }
 }
 
 // TODO: Turn this function into a method on `Fireworks`.
-fn add_rockets(fireworks: &mut Fireworks, rockets: usize) {
-    fireworks.rockets += rockets
+fn add_rockets(&mut self, rockets: usize) {
+    self.rockets += rockets;
 }
 
 // TODO: Turn this function into a method on `Fireworks`.
-fn start(fireworks: Fireworks) -> String {
-    "🚀".repeat(fireworks.rockets)
+fn start(self) -> String {
+    "🚀".repeat(self.rockets)
+}
+
 }
 
 fn main() {
