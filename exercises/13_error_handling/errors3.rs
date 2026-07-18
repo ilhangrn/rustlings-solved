@@ -8,19 +8,21 @@ use std::num::ParseIntError;
 fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
     let processing_fee = 1;
     let cost_per_item = 5;
-    let qty = item_quantity.parse::<i32>()?;
+    let qty = item_quantity.parse::<i32>()?; 
+    // ? mark is used to return err immediately, which shapes functions return
 
     Ok(qty * cost_per_item + processing_fee)
 }
 
 // TODO: Fix the compiler error by changing the signature and body of the
 // `main` function.
-fn main() {
+fn main() -> Result<(), ParseIntError>{
     let mut tokens = 100;
     let pretend_user_input = "8";
 
     // Don't change this line.
     let cost = total_cost(pretend_user_input)?;
+    // here ? mark will cause returning error if there is
 
     if cost > tokens {
         println!("You can't afford that many!");
@@ -28,4 +30,5 @@ fn main() {
         tokens -= cost;
         println!("You now have {tokens} tokens.");
     }
+    Ok(())
 }

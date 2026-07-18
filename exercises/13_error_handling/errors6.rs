@@ -34,8 +34,19 @@ impl PositiveNonzeroInteger {
     fn parse(s: &str) -> Result<Self, ParsePosNonzeroError> {
         // TODO: change this to return an appropriate error instead of panicking
         // when `parse()` returns an error.
-        let x: i64 = s.parse().unwrap();
-        Self::new(x).map_err(ParsePosNonzeroError::Creation)
+        // let x: i64 = s.parse().unwrap();
+        match s.parse() {
+            Ok(x) => Self::new(x).map_err(ParsePosNonzeroError::Creation),
+            // here we use map_err to convert the err coming from new()
+            // which is shown above as creationError for zero and negative
+            // we map them to enum we have for our own errors
+            // we call them creationError and parseIntError
+
+            // below we handle the error coming from parse() which is parseIntError
+            Err(e) => Err(ParsePosNonzeroError::ParseInt(e)),
+
+            // you see that we can return different types of error.
+        }
     }
 }
 
