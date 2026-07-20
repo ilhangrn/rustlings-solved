@@ -1,11 +1,19 @@
 // The trait `AppendBar` has only one function which appends "Bar" to any object
 // implementing this trait.
+
+// here is we turn fn append_bar into a trait which is a blueprint for any type that
+// wants to use append_bar function. So we can use impl AppendBar to add it.
 trait AppendBar {
     fn append_bar(self) -> Self;
 }
 
+// here we add it for String type.
 impl AppendBar for String {
     // TODO: Implement `AppendBar` for the type `String`.
+    fn append_bar(mut self) -> Self{
+        self.push_str("Bar");
+        self
+    }
 }
 
 fn main() {

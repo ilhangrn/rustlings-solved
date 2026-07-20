@@ -4,13 +4,16 @@
 // a custom error type to make it possible for callers to decide what to do next
 // when our function returns an error.
 
-use std::num::ParseIntError;
+use std::num::ParseIntError; // this comes from std
+// we wwill add one more type of error
+// which is our own custom error type for creation of positive non zero integer
 
 #[derive(PartialEq, Debug)]
 enum CreationError {
     Negative,
     Zero,
 }
+// we are done with adding custom error
 
 // A custom error type that we will be using in `PositiveNonzeroInteger::parse`.
 #[derive(PartialEq, Debug)]
