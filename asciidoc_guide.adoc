@@ -1,0 +1,355 @@
+= AsciiDoc Developer Guide
+:toc:
+:toclevels: 3
+:sectnums:
+:source-highlighter: highlight.js
+:highlightjs-theme: atom-one-dark
+:icons: font
+
+This file is a practical reference for writing project documentation in AsciiDoc.
+Copy sections from here into new docs as needed.
+
+== 1. Basic Document Structure
+
+Use this as a starter template:
+
+[source,adoc]
+----
+= Document Title
+Author Name
+:toc:
+:sectnums:
+
+== Overview
+Short summary.
+
+== Details
+Main content.
+----
+
+== 2. Headings and Text
+
+=== Heading Levels
+
+[source,adoc]
+----
+= Level 0 (document title)
+== Level 1
+=== Level 2
+==== Level 3
+----
+
+=== Inline Formatting
+
+[source,adoc]
+----
+*bold*
+_italic_
+`monospace`
+`inline code with symbols: cargo test -- --nocapture`
+----
+
+Rendered examples:
+
+*bold* +
+_italic_ +
+`monospace`
+
+== 3. Lists
+
+=== Unordered
+
+[source,adoc]
+----
+* First item
+* Second item
+** Nested item
+----
+
+=== Ordered
+
+[source,adoc]
+----
+. First step
+. Second step
+. Third step
+----
+
+=== Checklist
+
+[source,adoc]
+----
+* [x] Docs skeleton created
+* [ ] Add architecture section
+* [ ] Add troubleshooting notes
+----
+
+== 4. Source Code Blocks
+
+=== Rust Example
+
+[source,rust]
+----
+fn add(a: i32, b: i32) -> i32 {
+		a + b
+}
+
+fn main() {
+		println!("{}", add(2, 3));
+}
+----
+
+=== Shell Example
+
+[source,bash]
+----
+cargo test
+cargo clippy -- -D warnings
+----
+
+=== JSON Example
+
+[source,json]
+----
+{
+	"feature": "docs",
+	"enabled": true
+}
+----
+
+== 5. Admonitions (Notes, Warnings, Tips)
+
+Use admonitions to highlight important information.
+
+[source,adoc]
+----
+NOTE: This is a note.
+TIP: Use short examples that can be copied quickly.
+WARNING: Keep command examples aligned with current tooling.
+CAUTION: Avoid outdated CLI flags.
+IMPORTANT: Validate docs after changing CI commands.
+----
+
+NOTE: This is a note.
+
+TIP: Use short examples that can be copied quickly.
+
+WARNING: Keep command examples aligned with current tooling.
+
+== 6. Links
+
+=== External Links
+
+[source,adoc]
+----
+https://doc.rust-lang.org[Rust Documentation]
+----
+
+=== Cross-References in the Same File
+
+[source,adoc]
+----
+See <<tables_section,Tables>> for structured data examples.
+----
+
+=== Link to Another Project File
+
+[source,adoc]
+----
+See link:README.md[project README].
+----
+
+[#tables_section]
+== 7. Tables
+
+=== Simple Table
+
+[source,adoc]
+----
+|===
+|Command |Purpose
+
+|cargo test
+|Run tests
+
+|cargo clippy -- -D warnings
+|Run lints as errors
+|===
+----
+
+Rendered table:
+
+|===
+|Command |Purpose
+
+|cargo test
+|Run tests
+
+|cargo clippy -- -D warnings
+|Run lints as errors
+|===
+
+== 8. Images and Diagrams
+
+=== Insert an Image
+
+[source,adoc]
+----
+image::docs/images/architecture.png[Architecture, width=800]
+----
+
+=== Diagram Placeholder with Source Block
+
+[source,text]
+----
++-------------------+
+| CLI               |
+| parses arguments  |
++---------+---------+
+					|
+					v
++-------------------+
+| Core Logic        |
+| runs exercises    |
++-------------------+
+----
+
+== 9. Include Reusable Content
+
+Use includes for shared snippets.
+
+[source,adoc]
+----
+include\::docs/shared/ci-commands.adoc[]
+----
+
+You can also include tagged regions from another file:
+
+[source,adoc]
+----
+include\::docs/shared/setup.adoc[tag=macos]
+----
+
+== 10. Collapsible Sections
+
+Great for optional detail.
+
+[source,adoc]
+----
+[%collapsible]
+====
+This content is hidden by default and can be expanded.
+====
+----
+
+[%collapsible]
+====
+This content is hidden by default and can be expanded.
+====
+
+== 11. Developer Documentation Templates
+
+=== API Section Template
+
+[source,adoc]
+....
+== API: Feature Name
+
+=== Endpoint
+`GET /api/example`
+
+=== Request
+[source,json]
+----
+{ "id": 1 }
+----
+
+=== Response
+[source,json]
+----
+{ "ok": true }
+----
+
+=== Errors
+|===
+|Code |Meaning
+|400 |Invalid input
+|500 |Server error
+|===
+....
+
+=== Runbook Template
+
+[source,adoc]
+----
+== Runbook: Task Name
+
+=== Purpose
+Why this task exists.
+
+=== Preconditions
+* Access required
+* Tooling installed
+
+=== Steps
+. Run command A
+. Validate output B
+. Roll back if C happens
+
+=== Verification
+How to confirm success.
+
+=== Rollback
+How to undo safely.
+----
+
+== 12. Best Practices
+
+* Keep sections short and scannable.
+* Prefer runnable commands over pseudo commands.
+* Keep examples synchronized with the repository state.
+* Use one top-level topic per document.
+* Add a short "Verification" section for operational docs.
+
+== 13. Quick Copy Blocks
+
+=== Command Block
+
+[source,bash]
+----
+# Replace with project command
+cargo test
+----
+
+=== Config Snippet
+
+[source,toml]
+----
+[tool.example]
+enabled = true
+mode = "strict"
+----
+
+=== Troubleshooting Entry
+
+[source,adoc]
+----
+== Troubleshooting
+
+=== Symptom
+What fails.
+
+=== Cause
+Why it fails.
+
+=== Fix
+Exact commands or code changes.
+----
+
+== 14. Final Checklist Before Merging Docs
+
+* [ ] Commands were tested locally.
+* [ ] Links resolve correctly.
+* [ ] Code blocks use correct language hints.
+* [ ] Headings are consistent.
+* [ ] Outdated references were removed.
