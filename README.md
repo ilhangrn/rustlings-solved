@@ -11,7 +11,12 @@ Visit the **website** for a demo, info about setup and more:
 This repository uses flakes for the dev environment.
 
 - Enter the shell with: nix develop
-- Legacy [shell.nix](http://_vscodecontentref_/2) has been removed
+- Pin project Nix outputs against garbage collection: nix run .#lock
+- Legacy shell.nix has been removed
+
+The lock command creates project-local GC roots in .nix-gc-roots/. The dev shell
+root is always updated. The package root is best-effort and may be skipped while
+exercises are incomplete.
 
 If you do not have flakes enabled yet, enable Nix flakes in your local Nix config first.
 
