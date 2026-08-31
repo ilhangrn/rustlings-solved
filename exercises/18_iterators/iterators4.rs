@@ -10,6 +10,18 @@ fn factorial(num: u64) -> u64 {
     // - additional variables
     // For an extra challenge, don't use:
     // - recursion
+    // let mut res = 1;
+    // if num == 0 {
+    //     res = 1;
+    // }
+    // else {
+    //     for i in 1..=num {
+    //         res *= i;
+    //     }
+    // }
+    // res
+    (1..=num).product() // this should cover need
+    // it will return 1 for num = 0 as well, since the product of an empty iterator is 1
 }
 
 fn main() {
