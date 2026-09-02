@@ -23,6 +23,7 @@ toml = { version = "1", default-features = false, features = ["std", "parse", "s
 
 [package]
 name = "rustlings"
+default-run = "rustlings"
 description = "Small exercises to get you used to reading and writing Rust code!"
 version.workspace = true
 authors.workspace = true
