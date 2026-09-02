@@ -29,6 +29,8 @@ fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // `map` is a hash map with `String` keys and `Progress` values.
     // map = { "variables1": Complete, "from_str": None, … }
     let iter = map.values().filter(|&&v| v == value);
+    // &&v used to dereference the reference to the value in the hash map, 
+    // allowing us to compare it directly to the `value` parameter.
     iter.count()
 }
 
