@@ -1,4 +1,6 @@
 //! this demo runs with cargo run --bin heap_things
+//! to add new line in the doc comment
+//!
 //! tests run with cargo test --bin heap_things
 //! this style of comment called as inner doc comment
 //! this is a doc comment for the whole crate, and will be included in the generated documentation
