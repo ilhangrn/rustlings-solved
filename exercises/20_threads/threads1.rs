@@ -24,6 +24,15 @@ fn main() {
     for handle in handles {
         // TODO: Collect the results of all threads into the `results` vector.
         // Use the `JoinHandle` struct which is returned by `thread::spawn`.
+        // here join means to wait for the thread to finish and get its return value.
+        // but why we don't use word wait:
+        // 1. the term join comes from CS terminology for fork-join used in parallel programming.
+        // there is main thread and we forked 10 threads,
+        // now we want to join them back to main thread. 
+        // It seems like wait but we join them back to main thread.
+        // 2. wait is overloader, used for lots of things like:
+        let result = handle.join().unwrap();
+        results.push(result);
     }
 
     if results.len() != 10 {
