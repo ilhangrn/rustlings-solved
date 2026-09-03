@@ -37,9 +37,11 @@ mod tests {
         // No clone occurs because `input` doesn't need to be mutated.
         let vec = vec![0, 1, 2];
         let mut input = Cow::from(&vec);
-        abs_all(&mut input);
-        // TODO: Replace `todo!()` with `Cow::Owned(_)` or `Cow::Borrowed(_)`.
-        assert!(matches!(input, todo!()));
+        abs_all(&mut input); // since it is not entering if block
+        // it will remain a borrowed reference
+        // so we can check that it is still a borrowed reference
+        // No clone occurs because `input` doesn't need to be mutated.
+        assert!(matches!(input, Cow::Borrowed(_)));
     }
 
     #[test]
@@ -49,10 +51,10 @@ mod tests {
         // also no clone. But the result is still owned because it was never
         // borrowed or mutated.
         let vec = vec![0, 1, 2];
-        let mut input = Cow::from(vec);
+        let mut input = Cow::from(vec); // no reference, we own the vector directly
         abs_all(&mut input);
         // TODO: Replace `todo!()` with `Cow::Owned(_)` or `Cow::Borrowed(_)`.
-        assert!(matches!(input, todo!()));
+        assert!(matches!(input, Cow::Owned(_)));
     }
 
     #[test]
@@ -62,8 +64,9 @@ mod tests {
         // `abs_all` function returns a reference to the same data as before.
         let vec = vec![-1, 0, 1];
         let mut input = Cow::from(vec);
-        abs_all(&mut input);
+        abs_all(&mut input); // this will enter the if block and mutate the vector
+
         // TODO: Replace `todo!()` with `Cow::Owned(_)` or `Cow::Borrowed(_)`.
-        assert!(matches!(input, todo!()));
+        assert!(matches!(input, Cow::Owned(_)));
     }
 }
